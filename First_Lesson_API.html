@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+           <meta charset="UTF-8">
+           <meta name="viewport" content="width=device-width, initial-scale=1.0">
+           <title>USING API WITH WEATHER APPLICATION</title>
+</head>
+<body>
+           <form action="" class="weatherForm">
+                      <input type="text" class="city-input" placeholder="Enter City">
+                      <button class="get-weather" type="submit">Get Weather</button>
+           </form>
+           <div class="weather-information">
+                      <h1 class="city-name">Miami</h1>
+                      <p class="temperature-display">90°F</p>
+                      <p class="humidity-display">Humidity: 75%</p>
+                      <p class="discreption-display">Clear Skies</p>
+                      <p class="weather-Emoji">☀️</p>
+                      <p class="error-display">Please enter a city first</p>
+           </div>
+
+           <script>
+                      let apiKey = "54a6a1124efd82125266a4e1e157800f"
+                      let cityInput = document.querySelector(".city-input");
+                      let weatherDisplay = document.querySelector(".weather-information");
+                      let errorDisplay = document.querySelector(".error-display");
+                      let weatherEmoji = document.querySelector(".weather-Emoji");
+                      let temperatureDisplay = document.querySelector(".temperature-display");
+                      let humidityDisplay = document.querySelector(".humidity-display");
+                      let discreptionDisplay = document.querySelector(".discreption-display");
+                      let cityName = document.querySelector(".city-name");
+                      let getWeatherBtn = document.querySelector(".get-weather");
+
+                      let weather_link = "https://api.openweathermap.org/data/2.5/weather?units=metric&q="
+                      async function checkWeather(city) {
+                                 let response = await fetch(weather_link +city+ "&appid="+apiKey);
+                                 var data = await response.json()
+                                 console.log(data)
+                                 cityName.innerHTML = data.name;
+                                 temperatureDisplay.innerHTML= Math.round(data.main.temp) +"°F";
+                                 humidityDisplay.innerHTML ="Humidity: "+ data.main.humidity +"%";
+                                 discreptionDisplay.innerHTML = data.weather[0].description;
+                                 let icon = data.weather[0].icon;
+
+                                 if (icon == "01d") {
+                                            weatherEmoji.innerHTML = "🟡"
+                                 }
+                                 else if (icon == "02d") {
+                                            weatherEmoji.innerHTML = "⛅"
+                                 }
+                                 else if (icon == "03d") {
+                                            weatherEmoji.innerHTML = "☁️"
+                                 }
+                                 else if (icon == "04d") {
+                                            weatherEmoji.innerHTML = "🌥️"
+                                 }
+                                 else if (icon == "09d") {
+                                            weatherEmoji.innerHTML = "🌧️"
+                                 }
+                                 else if (icon == "10d") {
+                                            weatherEmoji.innerHTML = "🌧️"
+                                 }
+                                 else if (icon == "11d") {
+                                            weatherEmoji.innerHTML = ":-P"
+                                 }
+                                 else if (icon == "13d") {
+                                            weatherEmoji.innerHTML = "^_^"
+                                 }
+                                 else if (icon == "50d") {
+                                            weatherEmoji.innerHTML = "⚫"
+                                 }
+
+                                 if (cityName.innerHTML === " ") {
+                                            errorDisplay.innerHTML = "Please enter a city first";
+                                 }
+                                 else {
+                                            errorDisplay.innerHTML = "";
+                                 }
+                      }
+                      checkWeather("miami")
+                      getWeatherBtn.addEventListener("click", (e) => {
+                                 e.preventDefault();
+                                 errorDisplay.innerHTML = "";
+                                 cityName.innerHTML = ""
+                                 temperatureDisplay.innerHTML = "";
+                                 humidityDisplay.innerHTML = "";
+                                 discreptionDisplay.innerHTML = "";
+                                 weatherEmoji.innerHTML = "";
+                                 let city = cityInput.value.trim();
+                                 checkWeather(city);
+                                  cityInput.value = "";
+                      })
+           </script>
+</body>
+</html>
+
+<style>
+           body {
+                      background-color: #f1f1f1;
+                      font-family: Arial, Helvetica, sans-serif;
+                      margin: 0;
+                      padding: 20px;
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      height: 100vh;
+                      color: #333;
+                      box-sizing: border-box;
+                      text-align: center;
+                      flex-direction: column;
+                      transition: .5s ease-in;
+           }
+           html {
+                      scroll-behavior: smooth;
+           }
+           .weatherForm {
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      flex-direction: column;
+                      margin-top: 20px;
+                      text-align: center;
+                      border-radius: 10px;
+                      padding: 20px;
+                      background-color: #fff;
+                      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+                      width: 500px;
+                      max-width: 100%;
+                      border: 1px solid #ddd;
+                      z-index: 1;
+                      gap: 20px;
+           }
+           .weather-information {
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      flex-direction: column;
+                      margin-top: -13px;
+                      text-align: center;
+                      border-radius: 10px;
+                      background-color: #fff;
+                      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+                      width: 500px;
+                      max-width: 100%;
+                      border: 1px solid #ddd;
+           }
+           input[type="text"] {
+                      padding: 10px;
+                      width: 100%;
+                      border: none;
+                      border-radius: 5px;
+                      background-color: #f1f1f1;
+                      margin-bottom: 20px;
+                      font-size: 16px;
+                      outline: none;
+                      transition: background-color 0.3s ease-in-out;
+                      font-family: Arial, Helvetica, sans-serif;
+                      box-sizing: border-box;
+                      color: #333;
+                      text-align: center;
+                      border-bottom: 2px solid #ddd;
+                      letter-spacing: 1px;
+                      padding-bottom: 5px;
+                      padding-top: 5px;
+                      padding-left: 10px;
+                      padding-right: 10px;
+                      cursor: pointer;
+                      &:focus {
+                                 background-color: #ddd;
+                                  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+                                  border-bottom: 2px solid #ccc;
+                          }
+                          ::placeholder {
+                                 color: #ccc;
+                          }
+                          ::selection {
+                                 background-color: #ccc;
+                          }
+                          ::-webkit-input-placeholder {
+                                 color: #ccc;
+                          }
+                          ::-moz-placeholder {
+                                 color: #ccc;
+                          }
+
+           }
+           button[type="submit"] {
+                      padding: 10px 20px;
+                      border: none;
+                      border-radius: 5px;
+                      background-color: #4CAF50;
+                      color: #fff;
+                      cursor: pointer;
+                      transition: background-color 0.3s ease-in-out;
+                          &:hover {
+                                   background-color: #45a049;
+                          }
+                          &:focus {
+                                 background-color: #45a049;
+                                  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+                          }
+                          ::placeholder {
+                                 color: #ccc;
+                          }
+                          ::selection {
+                                 background-color: #ccc;
+                          }
+                          ::-webkit-input-placeholder {
+                                 color: #ccc;
+                          }
+                          ::-moz-placeholder {
+                                 color: #ccc;
+                          }
+                          :disabled {
+                                 background-color: #ccc;
+                                 cursor: not-allowed;
+                          }
+                          :disabled:hover {
+                                 background-color: #ccc;
+                          }
+                          :disabled:focus {
+                                 background-color: #ccc;
+                                  box-shadow: none;
+                          }
+                          :disabled ::placeholder {
+                                 color: #ccc;
+                          }
+                          :disabled ::selection {
+                                 background-color: #ccc;
+                          }
+                          :disabled ::-webkit-input-placeholder {
+                                 color: #ccc;
+                          }
+                          :disabled ::-moz-placeholder {
+                                 color: #ccc;
+                          }
+           }
+           h1 {
+                      color: #333;
+                      margin-bottom: 20px;
+                      text-align: center;
+                      font-weight: bold;
+                      font-family: Arial, Helvetica, sans-serif;
+                      line-height: 1.5;
+                      text-transform: uppercase;
+                      letter-spacing: 1px;
+                      font-style: normal;
+                      text-shadow: 1px 1px 2px black;
+                      font-family: Arial, Helvetica, sans-serif;
+                      font-style: normal;
+                      text-transform: uppercase;
+           }
+           p {
+                      margin-bottom: 10px;
+                      text-align: center;
+                      font-family: Arial, Helvetica, sans-serif;
+                      font-style: normal;
+                      text-transform: uppercase;
+                      text-shadow: 1px 1px 2px black;
+           }
+           p.weather-Emoji {
+                      font-size: 50px;
+                      text-align: center;
+                      font-style: normal;
+                      text-transform: uppercase;
+                      text-shadow: 1px 1px 2px black;
+                      color: #333;
+                      font-family: Arial, Helvetica, sans-serif;
+                      margin-top: -20px;
+                      margin-top: 10px;
+           }
+           p.error-display {
+                      color: red;
+                      font-size: 10px;
+                      margin-bottom: 20px;
+           }
+</style>
