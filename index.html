@@ -18,7 +18,6 @@
                       <p class="weather-Emoji">☀️</p>
                       <p class="error-display">Please enter a city first</p>
            </div>
-
            <script>
                       let apiKey = "54a6a1124efd82125266a4e1e157800f"
                       let cityInput = document.querySelector(".city-input");
@@ -42,16 +41,16 @@
                                  discreptionDisplay.innerHTML = data.weather[0].description;
                                  let icon = data.weather[0].icon;
 
-                                 if (icon == "01d") {
+                                 if (icon == "01d" || icon =="01n") {
                                             weatherEmoji.innerHTML = "🟡"
                                  }
-                                 else if (icon == "02d") {
+                                 else if (icon == "02d" || icon == "02n") {
                                             weatherEmoji.innerHTML = "⛅"
                                  }
-                                 else if (icon == "03d") {
+                                 else if (icon == "03d" || icon == "03n") {
                                             weatherEmoji.innerHTML = "☁️"
                                  }
-                                 else if (icon == "04d") {
+                                 else if (icon == "04d" || icon == "04n") {
                                             weatherEmoji.innerHTML = "🌥️"
                                  }
                                  else if (icon == "09d") {
@@ -61,16 +60,16 @@
                                             weatherEmoji.innerHTML = "🌧️"
                                  }
                                  else if (icon == "11d") {
-                                            weatherEmoji.innerHTML = ":-P"
+                                            weatherEmoji.innerHTML = "⛈️"
                                  }
                                  else if (icon == "13d") {
-                                            weatherEmoji.innerHTML = "^_^"
+                                            weatherEmoji.innerHTML = "❄️"
                                  }
                                  else if (icon == "50d") {
                                             weatherEmoji.innerHTML = "⚫"
                                  }
                                  else {
-                                            weatherEmoji.innerHTML = "-_-"
+                                            weatherEmoji.innerHTML = "(⊙x⊙)"
                                  }
                                  if (cityName.innerHTML === " ") {
                                             errorDisplay.innerHTML = "Please enter a city first";
