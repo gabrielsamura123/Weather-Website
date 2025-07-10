@@ -36,9 +36,9 @@
                                  var data = await response.json()
                                  console.log(data)
                                  cityName.innerHTML = data.name;
-                                 temperatureDisplay.innerHTML="Temperature: ", Math.round(data.main.temp) +"°F";
+                                 temperatureDisplay.innerHTML="Temperature: "+ Math.round(data.main.temp) +"°F";
                                  humidityDisplay.innerHTML ="Humidity: "+ data.main.humidity +"%";
-                                 discreptionDisplay.innerHTML ="Desc: " data.weather[0].description;
+                                 discreptionDisplay.innerHTML ="Desc: "+data.weather[0].description;
                                  let icon = data.weather[0].icon;
 
                                  if (icon == "01d" || icon =="01n") {
