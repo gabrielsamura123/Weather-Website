@@ -11,11 +11,11 @@
                       <button class="get-weather" type="submit">Get Weather</button>
            </form>
            <div class="weather-information">
-                      <h1 class="city-name">Miami</h1>
-                      <p class="temperature-display">90°F</p>
-                      <p class="humidity-display">Humidity: 75%</p>
-                      <p class="discreption-display">Clear Skies</p>
-                      <p class="weather-Emoji">☀️</p>
+                      <h1 class="city-name">----</h1>
+                      <p class="temperature-display">Temperature: ----</p>
+                      <p class="humidity-display">Humidity: ----</p>
+                      <p class="discreption-display">Desc: ----</p>
+                      <p class="weather-Emoji">(0:0)</p>
                       <p class="error-display">Please enter a city first</p>
            </div>
            <script>
@@ -36,9 +36,9 @@
                                  var data = await response.json()
                                  console.log(data)
                                  cityName.innerHTML = data.name;
-                                 temperatureDisplay.innerHTML= Math.round(data.main.temp) +"°F";
+                                 temperatureDisplay.innerHTML="Temperature: ", Math.round(data.main.temp) +"°F";
                                  humidityDisplay.innerHTML ="Humidity: "+ data.main.humidity +"%";
-                                 discreptionDisplay.innerHTML = data.weather[0].description;
+                                 discreptionDisplay.innerHTML ="Desc: " data.weather[0].description;
                                  let icon = data.weather[0].icon;
 
                                  if (icon == "01d" || icon =="01n") {
@@ -78,7 +78,7 @@
                                             errorDisplay.innerHTML = "";
                                  }
                       }
-                      checkWeather("miami")
+                      checkWeather(cityInput.value)
                       getWeatherBtn.addEventListener("click", (e) => {
                                  e.preventDefault();
                                  errorDisplay.innerHTML = "";
@@ -189,7 +189,7 @@
                       padding: 10px 20px;
                       border: none;
                       border-radius: 5px;
-                      background-color: #4CAF50;
+                      background-color: darkgrey;
                       color: #fff;
                       cursor: pointer;
                       transition: background-color 0.3s ease-in-out;
